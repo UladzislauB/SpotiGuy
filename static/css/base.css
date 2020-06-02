@@ -13,62 +13,138 @@ body {
     position: relative;
 }
 
-body .sidenav {
+body aside {
     position: fixed;
     width: 200px;
     height: 100%;
-    padding: 20px 0;
+    padding-top: 20px;
     background: #5cdd95;
     top: 0;
     left: 0;
 
 }
 
-.sidenav h2 {
+.main-nav h2 {
     color: #05386b;
     text-align: center;
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-.sidenav ul li {
+.main-nav ul li {
     padding: 10px 15px;
     margin: 10px;
 }
 
-.sidenav ul li a {
+.main-nav ul li a {
     color: #05386b;
     display: block;
     vertical-align: middle;
 }
 
-.sidenav ul li a svg {
+.main-nav ul li a svg {
     margin-right: 8px;
     vertical-align: bottom;
     fill: #05386b;
 }
 
-.sidenav ul li a span {
-    font-size: 20px;
+.main-nav ul li a span {
+    font-size: 18px;
+    font-weight: bolder;
 }
 
-.sidenav ul li:hover {
+.main-nav ul li:hover {
     background: #05386b;
     fill: #5cdd95;
     border-radius: 10px;
 }
 
-.sidenav ul li:hover a {
+.main-nav ul li:hover a {
     color: #5cdd95;
+    font-size: 20px;
 }
 
-.sidenav ul li:hover svg {
+.main-nav ul li:hover svg {
     fill: #5cdd95;
 }
 
+.second-nav h3 {
+    color: #05386b;
+    text-transform: uppercase;
+    margin: 15px 25px 10px;
+}
 
+.second-nav ul {
+    height: 210px;
+    overflow: auto;
+    border-bottom: 1px solid #05386b;
+    padding-bottom: 10px;
+}
+
+.second-nav ul li {
+    padding: 10px 20px;
+}
+
+.second-nav ul li a{
+    display: block;
+}
+
+.second-nav ul li a {
+    color: #05386b;
+    font-weight: bolder;
+}
+
+.second-nav ul li:hover {
+    border-left: 10px solid #05386b;
+    padding-left: 10px;
+}
+
+.second-nav ul li:hover a {
+    color: #edf5e1;
+}
+
+aside .song-img {
+    position: absolute;
+    height: 200px;
+    bottom: 0;
+}
+
+aside .song-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+aside .add-playlist {
+    padding: 10px;
+    margin: 10px;
+}
+
+aside .add-playlist a {
+    display: block;
+}
+
+aside .add-playlist a svg {
+    fill: #05386b;
+    margin-right: 10px;
+}
+
+aside .add-playlist a span {
+    vertical-align: middle;
+    font-weight: bolder;
+    color: #05386b;
+}
+
+aside .add-playlist a:hover svg {
+    fill: #edf5e1;
+}
+
+aside .add-playlist a:hover span {
+    color: #edf5e1;
+}
 
 main {
     position: absolute;
     left: 200px;
+    margin: 30px;
 }
