@@ -7,13 +7,18 @@
     font-family: sans-serif;
 }
 
-body {
-    background: #8ee4af;
+html, body {
+    height: 100%;
+}
+
+body .wrapper {
     display: flex;
+    background: #8ee4af;
+    height: 100%;
     position: relative;
 }
 
-body aside {
+.wrapper aside {
     position: fixed;
     width: 200px;
     height: 100%;
@@ -21,7 +26,7 @@ body aside {
     background: #5cdd95;
     top: 0;
     left: 0;
-
+    padding-bottom: 62px;
 }
 
 .main-nav h2 {
@@ -53,7 +58,7 @@ body aside {
     font-weight: bolder;
 }
 
-.main-nav ul li:hover {
+.main-nav ul li:hover, li:active {
     background: #05386b;
     fill: #5cdd95;
     border-radius: 10px;
@@ -85,7 +90,7 @@ body aside {
     padding: 10px 20px;
 }
 
-.second-nav ul li a{
+.second-nav ul li a {
     display: block;
 }
 
@@ -103,48 +108,119 @@ body aside {
     color: #edf5e1;
 }
 
-aside .song-img {
-    position: absolute;
+.wrapper aside .song-img {
     height: 200px;
-    bottom: 0;
+    margin-bottom: 62px;
 }
 
-aside .song-img img {
+.wrapper aside .song-img img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-aside .add-playlist {
+.wrapper aside .add-playlist {
     padding: 10px;
-    margin: 10px;
+    margin: 0 10px;
 }
 
-aside .add-playlist a {
+.wrapper aside .add-playlist a {
     display: block;
 }
 
-aside .add-playlist a svg {
+.wrapper aside .add-playlist a svg {
     fill: #05386b;
     margin-right: 10px;
 }
 
-aside .add-playlist a span {
-    vertical-align: middle;
+.wrapper aside .add-playlist a span {
+    vertical-align: super;
     font-weight: bolder;
     color: #05386b;
 }
 
-aside .add-playlist a:hover svg {
+.wrapper aside .add-playlist a:hover svg {
     fill: #edf5e1;
 }
 
-aside .add-playlist a:hover span {
+.wrapper aside .add-playlist a:hover span {
     color: #edf5e1;
 }
 
-main {
-    position: absolute;
+.wrapper main {
     left: 200px;
-    margin: 30px;
+    margin-left: 200px;
+    margin-bottom: 62px;
+    width: 100%;
+}
+
+.wrapper footer {
+    position: absolute;
+    bottom: 0;
+    background: #1db954;
+    width: 100%;
+    height: 62px;
+}
+
+.wrapper footer .bottom-panel {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .bottom-panel .btn {
+    margin-left: 10px;
+    background: none;
+    height: 20px;
+    width: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.bottom-panel .now-playing {
+    display: flex;
+    align-self: center;
+    margin-left: 15px;
+}
+
+.bottom-panel .now-playing ul li {
+    padding-bottom: 5px;
+}
+
+.bottom-panel .now-playing ul li a {
+    display: block;
+    font-weight: bolder;
+    font-size: 16px;
+    color: #edf5e1;
+}
+
+.bottom-panel .now-playing ul li:last-of-type a {
+    display: inline;
+    font-size: 14px;
+}
+
+.bottom-panel .now-playing svg {
+    fill: #edf5e1;
+}
+
+.bottom-panel .now-playing ul li:hover a {
+    text-decoration-line: underline;
+    color: #05386b;
+}
+
+.bottom-panel .player-controls__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 250px;
+}
+
+.bottom-panel .player-controls__buttons .btn svg {
+    fill: #edf5e1;
+}
+
+.bottom-panel .btn:hover svg {
+    fill: #05386b;
 }
