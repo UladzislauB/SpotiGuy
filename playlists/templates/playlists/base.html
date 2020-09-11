@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}SpotiGuy{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'range-slider/range-slider.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 </head>
@@ -196,15 +197,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-bar__background">
-                        <div class="progress-bar__foreground_wrapper">
-                            <div class="progress-bar__foreground">
-                            </div>
-                        </div>
-                        <button class="progress-bar__slider"/>
-                    </div>
-                </div>
+                <input type="range" min="0" max="100" step="1"/>
             </div>
             <div class="bottom-panel__right">
                 <button class="btn" style="height: 25px; width: 25px;">
@@ -244,18 +237,24 @@
                     </g>
                     </svg>
                 </button>
-                <div class="progress-bar volume-bar">
-                    <div class="progress-bar__background">
-                        <div class="progress-bar__foreground_wrapper">
-                            <div class="progress-bar__foreground">
-                            </div>
-                        </div>
-                        <button class="progress-bar__slider">
-                    </div>
+                <div class="volume-bar__wrapper">
+                    <input type="range" min="0" max="100" step="1">
                 </div>
             </div>
         </div>
     </footer>
 </div>
 </body>
+<script src="{% static 'range-slider/range-slider.js' %}"></script>
+<script>
+    const sliders = document.querySelectorAll('input[type="range"]');
+    sliders.forEach(slider => {
+        rangeSlider.create(slider, {
+            onSlide: (value, percent, position) => {
+                console.log(value)
+            }
+        });
+    });
+
+</script>
 </html>
