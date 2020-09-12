@@ -247,14 +247,31 @@
 </body>
 <script src="{% static 'range-slider/range-slider.js' %}"></script>
 <script>
-    const sliders = document.querySelectorAll('input[type="range"]');
-    sliders.forEach(slider => {
-        rangeSlider.create(slider, {
-            onSlide: (value, percent, position) => {
-                console.log(value)
-            }
-        });
+    const progressBar = document.querySelector('.player-controls input[type="range"]');
+    const volumeBar = document.querySelector('.volume-bar__wrapper input[type="range"]');
+    rangeSlider.create(progressBar, {
+        onSlide: (value, percent, position) => {
+            document.querySelector('.player-controls .rangeSlider__fill').style.background = '#05386b';
+            document.querySelector('.player-controls .rangeSlider__handle').style.opacity = '1';
+        },
+        onSlideEnd: value => {
+            document.querySelector('.player-controls .rangeSlider__fill').style.background = '#edf5e1';
+            document.querySelector('.player-controls .rangeSlider__handle').style.opacity = '0';
+            {#document.querySelector('.player-controls .rangeSlider__horizontal:hover .rangeSlider__fill').style.background = '#05386b';#}
+            {#document.querySelector('.player-controls .rangeSlider__horizontal:hover .rangeSlider__handle').style.opacity = '1';#}
+        }
     });
+    rangeSlider.create(volumeBar, {
+        onSlide: value => {
+            document.querySelector('.volume-bar__wrapper .rangeSlider__fill').style.background = '#05386b';
+            document.querySelector('.volume-bar__wrapper .rangeSlider__handle').style.opacity = '1';
+        },
+        onSlideEnd: value => {
+            document.querySelector('.volume-bar__wrapper .rangeSlider__fill').style.background = '#edf5e1';
+            document.querySelector('.volume-bar__wrapper .rangeSlider__handle').style.opacity = '0  ';
+        }
+    })
+
 
 </script>
 </html>
