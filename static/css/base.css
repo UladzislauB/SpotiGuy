@@ -263,6 +263,14 @@ footer .bottom-panel .btn {
     background: #edf5e1;
 }
 
+.buttonOnRangeFill {
+    background: #05386b;
+}
+
+.buttonOffRangeFill {
+    background: #edf5e1;
+}
+
 .rangeSlider__horizontal:hover .rangeSlider__fill {
     background: #05386b;
 }
