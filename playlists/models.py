@@ -1,4 +1,5 @@
 from django.db import models
+
 from authentication.models import User
 
 
@@ -24,12 +25,26 @@ class Song(models.Model):
 
     added_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=128)
-    duration = models.DurationField()
-    lyrics = models.TextField()
+    duration = models.DurationField(default=0)
+    listenings = models.IntegerField(default=0)
+    lyrics = models.TextField(blank=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    _audio_file = models.FileField(upload_to='audio/%Y/%m/%d/', null=True)
+
+    def set_audio_file(self, val):
+        self._audio_file = val
+
+    def get_audio_file(self):
+        return self._audio_file
 
     def duration_pretty(self):
         return f'{self.duration.min}:{self.duration.seconds % 60}'
+
+    def audio_path(self):
+        return self.get_audio_file().path
+
+    def audio_url(self):
+        return self.get_audio_file().url
 
     def __str__(self):
         return self.name
