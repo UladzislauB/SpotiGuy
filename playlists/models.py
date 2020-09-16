@@ -25,25 +25,11 @@ class Song(models.Model):
 
     added_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=128)
-    duration = models.DurationField()
+    song_duration = models.DurationField()
     listenings = models.IntegerField(default=0)
     lyrics = models.TextField(blank=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    _audio_file = models.FileField(upload_to='audio/%Y/%m/%d/', null=True)
-
-    def set_audio_file(self, val):
-        self._audio_file = val
-
-    def get_audio_file(self):
-        return self._audio_file
-
-    def duration_pretty(self):
-        return f'{self.duration.minutes}:{self.duration.seconds}'
-
-    def save(self, *args, **kwargs):
-        self.auth_path = self.get_audio_file().path
-        self.auth_url = self.get_audio_file().url
-        super(Song, self).save(*args, **kwargs)
+    audio_file = models.FileField(upload_to='audio/%Y/%m/%d/', null=True)
 
     def __str__(self):
         return self.name
