@@ -9,14 +9,14 @@ class Album(models.Model):
 
     added_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=128)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='album_covers/%Y/%m/%d/')
 
     def count_songs(self):
         return self.song_set.count()
 
     def __str__(self):
-        return self.name
+        return self.name + ' - ' + self.owner.username
 
 
 class Song(models.Model):
@@ -32,7 +32,7 @@ class Song(models.Model):
     audio_file = models.FileField(upload_to='audio/%Y/%m/%d/', null=True)
 
     def __str__(self):
-        return self.name
+        return self.name + ' - ' + self.album.owner.username
 
 
 class Genre(models.Model):
