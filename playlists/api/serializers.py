@@ -11,6 +11,8 @@ class SongSerializer(serializers.Serializer):
     lyrics = serializers.CharField(allow_blank=True, required=False, style={'base_template': 'textarea.html'})
     listenings = serializers.IntegerField(read_only=True)
     album = serializers.PrimaryKeyRelatedField(queryset=Album.objects.all())
+    playlist_set = serializers.HyperlinkedRelatedField(allow_empty=True, many=True,
+                                                       view_name='playlist-detail', read_only=True)
     song_duration = serializers.DurationField()
     audio_file = serializers.FileField(allow_null=True, max_length=100, required=False)
 
@@ -40,7 +42,7 @@ class AlbumSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=128)
     owner = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
     image = serializers.ImageField(max_length=100)
-    # song_set = serializers.HyperlinkedRelatedField(view_name='song-detail', queryset=Song.objects.all(), source='song_set')
+    song_set = serializers.HyperlinkedRelatedField(allow_empty=True, view_name='song-detail', read_only=True, many=True)
 
     def create(self, validated_data):
         return Album.objects.create(**validated_data)
@@ -63,8 +65,8 @@ class PlaylistSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=64)
     image = serializers.ImageField(max_length=100)
     genre = serializers.HyperlinkedRelatedField(queryset=Genre.objects.all(), view_name='genre-detail')
-    songs = serializers.HyperlinkedRelatedField(allow_empty=False, many=True,
-                                                view_name='song-detail', read_only=True)
+    songs = serializers.HyperlinkedRelatedField(allow_empty=True, many=True, view_name='song-detail',
+                                                queryset=Song.objects.all())
     description = serializers.CharField(style={'base_template': 'textarea.html'})
     owner = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
 
@@ -76,10 +78,16 @@ class PlaylistSerializer(serializers.Serializer):
         return instance
 
     def create(self, validated_data):
-        return Playlist.objects.create(**validated_data)
+        valid_copy = validated_data.copy()
+        valid_copy.pop('songs')
+        instance = Playlist.objects.create(**valid_copy)
+        instance.songs.add(*validated_data['songs'])
+        return instance
 
 
 class GenreSerializer(serializers.HyperlinkedModelSerializer):
+    playlists = serializers.ReadOnlyField(source='playlist_set.all()')
+
     class Meta:
         model = Genre
-        fields = ['id', 'name', 'background_color']
+        fields = ['id', 'name', 'background_color', 'playlists']

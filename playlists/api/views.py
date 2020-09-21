@@ -3,7 +3,7 @@ from rest_framework import viewsets
 
 from playlists.models import Song, Playlist, Genre, Album
 from .serializers import SongSerializer, PlaylistSerializer, GenreSerializer, AlbumSerializer
-from .permissions import IsOwnerOrReadOnly, IsOwnerOrReadCreateOnly
+from .permissions import IsOwnerOrReadOnly, IsOwnerOrReadCreateOnly, IsAdminUserOrReadOnly
 
 
 class AlbumViewSet(viewsets.ModelViewSet):
@@ -36,3 +36,4 @@ class PlaylistViewSet(viewsets.ModelViewSet):
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permissions = [IsAdminUserOrReadOnly]

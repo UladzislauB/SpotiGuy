@@ -16,7 +16,7 @@ class Album(models.Model):
         return self.song_set.count()
 
     def __str__(self):
-        return self.name + ' - ' + self.owner.username
+        return self.name + ' ● by ' + self.owner.username
 
 
 class Song(models.Model):
@@ -32,7 +32,7 @@ class Song(models.Model):
     audio_file = models.FileField(upload_to='audio/%Y/%m/%d/', null=True)
 
     def __str__(self):
-        return self.name + ' - ' + self.album.owner.username
+        return self.name + ' ● ' + self.album.owner.username
 
 
 class Genre(models.Model):
@@ -56,7 +56,7 @@ class Playlist(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.name + ' ● by ' + self.owner.username
 
     def count_songs(self):
         return self.songs.count()
