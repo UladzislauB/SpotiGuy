@@ -85,9 +85,19 @@ class PlaylistSerializer(serializers.Serializer):
         return instance
 
 
-class GenreSerializer(serializers.HyperlinkedModelSerializer):
-    playlists = serializers.ReadOnlyField(source='playlist_set.all()')
+class GenreSerializer(serializers.Serializer):
+    id = serializers.IntegerField(label='ID', read_only=True)
+    name = serializers.CharField(max_length=64)
+    background_color = serializers.CharField(max_length=16)
+    playlist_set = serializers.HyperlinkedRelatedField(many=True, queryset=Playlist.objects.all(),
+                                                       view_name='playlist-detail', allow_empty=True)
 
-    class Meta:
-        model = Genre
-        fields = ['id', 'name', 'background_color', 'playlists']
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.background_color = validated_data.get('background_color', instance.background_color)
+        if 'playlist_set' in validated_data:
+            instance.playlist_set.add(*validated_data['playlist_set'])
+        return instance
+
+    def create(self, validated_data):
+        return Genre.objects.create(**validated_data)

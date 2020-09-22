@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres.fields import ArrayField
 
 
 class User(AbstractUser):
@@ -13,6 +14,15 @@ class User(AbstractUser):
     ]
 
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=CLIENT)
+    recently_played = ArrayField(
+        ArrayField(
+            models.CharField(max_length=10),
+            size=2
+        ),
+        blank=True,
+        size=8,
+        default=list
+    )
 
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

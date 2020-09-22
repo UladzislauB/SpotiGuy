@@ -247,6 +247,8 @@
 </body>
 <script src="{% static 'range-slider/range-slider.js' %}"></script>
 <script>
+    let main = document.querySelector('main');
+
     const progressBar = document.querySelector('.player-controls input[type="range"]');
     const volumeBar = document.querySelector('.volume-bar__wrapper input[type="range"]');
     rangeSlider.create(progressBar, {
@@ -268,8 +270,7 @@
             document.querySelector('.volume-bar__wrapper .rangeSlider__fill').style.background = '#edf5e1';
             document.querySelector('.volume-bar__wrapper .rangeSlider__handle').style.opacity = '0';
         }
-    })
-
-
+    });
 </script>
+<script src="{% static 'js/genres.js' %}"></script>
 </html>
