@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'range-slider/range-slider.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/genresPage.css' %}">
+    <script src="{% static 'js/app.js' %}" type="module" ></script>
 </head>
 <body>
 <div class="wrapper">
@@ -29,7 +31,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#/genres" id="search_btn">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                              y="0px" width="24px" height="24px"
@@ -272,5 +274,4 @@
         }
     });
 </script>
-<script src="{% static 'js/genres.js' %}"></script>
 </html>

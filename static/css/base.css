@@ -38,15 +38,12 @@ body .wrapper {
     margin-bottom: 20px;
 }
 
-.main-nav ul li {
-    padding: 10px 15px;
-    margin: 10px;
-}
-
 .main-nav ul li a {
     color: #05386b;
-    display: block;
-    vertical-align: middle;
+    display: flex;
+    height: 40px;
+    padding: 0 15px;
+    align-items: center;
 }
 
 .main-nav ul li a svg {
@@ -155,6 +152,9 @@ body .wrapper {
 
 .wrapper main {
     display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    align-content: flex-start;
     left: 200px;
     margin-left: 200px;
     margin-bottom: 62px;
