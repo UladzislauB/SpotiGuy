@@ -17,7 +17,7 @@ let getPlaylistsList = async () => {
 let HomePage = {
     render: async () => {
         let playlists = await getPlaylistsList();
-        console.log(playlists);
+
         let view = playlists.map(playlist => `
             <a href="#/playlist/${playlist.id}" class="playlist-card__wrapper" id="playlist-${playlist.id}" draggable="false">
                 <div class="playlist-card__container">

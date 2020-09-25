@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/genresPage.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/error404Page.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/homePage.css' %}">
-    <script src="{% static 'js/app.js' %}" type="module" ></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/playlistPage.css' %}">
+    <script src="{% static 'js/app.js' %}" type="module"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -104,6 +105,10 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <audio autoplay id="player" style="width: 200px">
+        <source src="http://localhost:8000/media/audio/2020/09/22/The_Weeknd_feat._Daft_Punk_-_Starboy.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
     <footer>
         <div class="bottom-panel">
             <div class="now-playing">
