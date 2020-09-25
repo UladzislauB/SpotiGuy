@@ -1,0 +1,20 @@
+.error {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: linear-gradient(45deg,#8c1932,#ff6437 60%);
+}
+
+.error__content {
+    color: #edf5e1;
+    position: relative;
+    top: 50%;
+    margin-top: -30px;
+    font-size: 4em;
+    font-weight: 500;
+}
