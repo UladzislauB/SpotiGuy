@@ -24,5 +24,8 @@ class User(AbstractUser):
         default=list
     )
 
+    playlist_queue_id = models.IntegerField(default=None, null=True)
+    current_song = models.PositiveSmallIntegerField(default=None, null=True)
+
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
