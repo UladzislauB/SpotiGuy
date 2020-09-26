@@ -10,7 +10,10 @@ class SongSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=128)
     lyrics = serializers.CharField(allow_blank=True, required=False, style={'base_template': 'textarea.html'})
     listenings = serializers.IntegerField(read_only=True)
-    album = serializers.PrimaryKeyRelatedField(queryset=Album.objects.all())
+    album = serializers.HyperlinkedRelatedField(queryset=Album.objects.all(), view_name='album-detail')
+    album_name = serializers.CharField(source='album.name', read_only=True)
+    owner_name = serializers.CharField(source='album.owner.username', read_only=True)
+    image = serializers.ImageField(source='album.image', read_only=True)
     playlist_set = serializers.HyperlinkedRelatedField(allow_empty=True, many=True,
                                                        view_name='playlist-detail', read_only=True)
     song_duration = serializers.DurationField()

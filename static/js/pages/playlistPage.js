@@ -69,9 +69,27 @@ let PlaylistPage = {
                     <a href="" class="playlist__owner" draggable="false">${playlist.ownerModel.username}</a>
                 </div>
             </div>
-            <ol>
-                
-            </ol>
+            <div class="grid playlist__songs">
+                <div></div>
+                <div class="grid-item"><span style="margin-left: 35px">Title</span></div>
+                <div class="grid-item"><span>Artist</span></div>
+                <div class="grid-item"><span>Album</span></div>
+                <div class="grid-item">
+                    <svg id="clock_icon" enable-background="new 0 0 443.294 443.294" viewBox="0 0 443.294 443.294"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m221.647 0c-122.214 0-221.647 99.433-221.647 221.647s99.433 221.647 221.647 221.647 221.647-99.433 221.647-221.647-99.433-221.647-221.647-221.647zm0 415.588c-106.941 0-193.941-87-193.941-193.941s87-193.941 193.941-193.941 193.941 87 193.941 193.941-87 193.941-193.941 193.941z" />
+                        <path d="m235.5 83.118h-27.706v144.265l87.176 87.176 19.589-19.589-79.059-79.059z" />
+                    </svg>
+                </div>
+                ${playlist.songsList.map(song => `
+                    <div class="grid-item img-container"><img class="song-img" src=${song.image}></div>
+                    <div class="grid-item"><span class="song-name">${song.name}</span></div>
+                    <div class="grid-item"><a href="#" class="song-owner">${song.owner_name}</a></div>
+                    <div class="grid-item"><a href="#" class="song-album">${song.album_name}</a></div>
+                    <div class="grid-item"><span class="song-duration">${song.song_duration.slice(4)}</span></div>
+                `).join('\n')}
+            </div>
         `
         return view
     },
