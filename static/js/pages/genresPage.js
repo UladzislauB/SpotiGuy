@@ -6,7 +6,7 @@ let getGenresList = async () => {
         }
     };
     try {
-        return await fetch('http://localhost:8000/api/genres/', options)
+        return await fetch('/api/genres/', options)
             .then(response => response.json())
             .then(response => response.results)
             .then(async genres => {

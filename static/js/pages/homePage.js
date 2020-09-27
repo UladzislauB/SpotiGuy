@@ -6,7 +6,7 @@ let getPlaylistsList = async () => {
         }
     };
     try {
-        return await fetch('http://localhost:8000/api/playlists/', options)
+        return await fetch('/api/playlists/', options)
             .then(response => response.json())
             .then(response => response.results)
     } catch (e) {

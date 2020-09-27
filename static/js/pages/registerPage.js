@@ -32,18 +32,17 @@ let registerUser = async () => {
             'password': pass.value,
             'first_name': firstName.value,
             'last_name': lastName.value,
-        }
+        };
 
         let options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data) // body data type must match "Content-Type" header
-        }
+        };
         try {
-            await fetch('http://localhost:8000/api/users/', options)
+            await fetch('/api/users/', options)
                 .then(response => {
                     if (response.status === 201) {
                         document.getElementById("auth-page").style.zIndex = '-1';
