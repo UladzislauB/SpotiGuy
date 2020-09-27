@@ -2,16 +2,30 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.views import Token
-from rest_framework import generics
 
 from .serializers import UserSerializer, UserLoginSerializer
+from .permissions import ReadCreateOnly
 from authentication.models import User
 
 
-class UserListAPI(generics.ListCreateAPIView):
+class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [ReadCreateOnly]
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        token, _ = Token.objects.get_or_create(user=user)
+        if user:
+            login(self.request, user)
+            token, _ = Token.objects.get_or_create(user=user)
+
+            return JsonResponse(
+                {'token': token.key},
+                status=201
+            )
 
 
 class Login(APIView):

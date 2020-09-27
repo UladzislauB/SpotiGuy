@@ -15,20 +15,23 @@ body .wrapper {
     display: flex;
     background: #8ee4af;
     height: 100%;
-    position: relative;
+    flex-direction: column;
+}
+
+body .wrapper > .flex {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 62px);
+    grid-template-columns: 200px 1fr;
 }
 
 .wrapper aside {
     display: flex;
     flex-direction: column;
-    position: fixed;
     width: 200px;
     height: 100%;
     padding-top: 20px;
     background: #5cdd95;
-    top: 0;
-    left: 0;
-    margin-bottom: 62px;
 }
 
 .main-nav h2 {
@@ -112,7 +115,6 @@ body .wrapper {
 
 .wrapper aside .song-img {
     height: 200px;
-    margin-bottom: 62px;
 }
 
 .wrapper aside .song-img img {
@@ -155,14 +157,11 @@ body .wrapper {
     flex-wrap: wrap;
     overflow: auto;
     align-content: flex-start;
-    left: 200px;
-    margin-left: 200px;
-    margin-bottom: 62px;
-    width: 100%;
+    width: calc(100% - 200px);
 }
 
 .wrapper footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background: #1db954;
     width: 100%;
@@ -286,4 +285,12 @@ footer .bottom-panel .btn {
 
 .volume-bar__wrapper .rangeSlider__horizontal {
     width: 100px;
+}
+
+@media only screen and (max-height: 600px) {
+    .wrapper aside .song-img {
+        display: none;
+    }
+}
+
 }

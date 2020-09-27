@@ -1,7 +1,5 @@
 from rest_framework import permissions
 
-from playlists.models import Album
-
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """

@@ -21,12 +21,14 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
 from playlists.api import views
+from authentication.api.views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'songs', views.SongViewSet)
 router.register(r'genres', views.GenreViewSet)
 router.register(r'playlists', views.PlaylistViewSet)
 router.register(r'albums', views.AlbumViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
