@@ -1,3 +1,5 @@
+import DropdownMenu from "../components/dropdownMenu.js";
+
 let loginUser = async () => {
     const username = document.getElementById('username_input');
     const pass = document.getElementById("pass_input");
@@ -17,7 +19,13 @@ let loginUser = async () => {
 
     try {
         await fetch("/api-auth/login/", options)
-            .then(response => console.log(response))
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.hash = '#/';
+                    return response.json();
+                }
+            })
+            .then(response => DropdownMenu.render(response['username'], response['role']))
     } catch (e) {
         console.error("Fail to login", e);
     }
@@ -29,8 +37,8 @@ let LoginPage = {
              <div class="auth-page" id="auth-page">
                 <form id="loginForm">
                     <div class="btn-group">
-                        <button id="register" type="button">Register</button>
-                        <button id="login" type="button">Login</button>
+                        <a href="#/register" id="register" type="button">Register</a>
+                        <a href="#/login" id="login" type="button">Login</a>
                     </div>
                     <input type="text" placeholder="Username" id="username_input"/>
     

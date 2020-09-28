@@ -1,0 +1,55 @@
+body > .wrapper > .dropdown {
+    position: absolute;
+    right: 70px;
+    top: 25px;
+}
+
+body > .wrapper > .dropdown .dropbtn {
+    font-size: 18px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 8px;
+    border-radius: 16px;
+    background: linear-gradient(to bottom, #05386b 0%, #5cdd95 98%);;
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    margin: 0;
+}
+
+body > .wrapper > .dropdown .dropbtn > svg {
+    margin-left: 5px;
+    fill: #edf5e1;
+}
+
+body > .wrapper > .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+body > .wrapper > .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+body > .wrapper > .dropdown .dropdown-content a {
+    float: none;
+    color: black;
+    font-size: 18px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+body > .wrapper > .dropdown .dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+body > .wrapper > .dropdown:hover .dropdown-content {
+    display: block;
+}

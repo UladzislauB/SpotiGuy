@@ -44,7 +44,11 @@ class Login(APIView):
             token, _ = Token.objects.get_or_create(user=user)
 
             return JsonResponse(
-                {'token': token.key},
+                {
+                    'username': user.username,
+                    'role': user.role,
+                    'token': token.key
+                },
                 status=200
             )
         else:

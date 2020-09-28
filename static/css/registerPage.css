@@ -28,19 +28,31 @@
 }
 
 .auth-page > form button {
-    background: #011b35;
+    background: #577284;
     height: calc(16px + 5vmin);
     font-size: calc(16px + 2vmin);
     color: #edf5e1;
     outline: none;
 }
 
+
 .auth-page > form > .btn-group {
     display: flex;
 }
 
-.auth-page > form > .btn-group > button {
+.auth-page > form > .btn-group > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #577284;
+    height: calc(16px + 5vmin);
+    font-size: calc(16px + 2vmin);
+    color: #edf5e1;
     width: 50%;
+}
+
+.auth-page > form > .btn-group a:first-child {
+    margin-right: 1px;
 }
 
 .auth-page > form > #submitButton {

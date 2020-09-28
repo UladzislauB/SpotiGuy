@@ -45,7 +45,7 @@ let registerUser = async () => {
             await fetch('/api/users/', options)
                 .then(response => {
                     if (response.status === 201) {
-                        document.getElementById("auth-page").style.zIndex = '-1';
+                        window.location.hash = '#/';
                     }
                 })
         } catch (e) {
@@ -61,8 +61,8 @@ let RegisterPage =  {
             <div class="auth-page" id="auth-page">
                 <form id="registerForm">
                     <div class="btn-group">
-                        <button id="register" type="button">Register</button>
-                        <button id="login" type="button">Login</button>
+                        <a href="#/register" id="register" type="button">Register</a>
+                        <a href="#/login" id="login" type="button">Login</a>
                     </div>
                     <input type="text" placeholder="Username" id="username_input"/>
                     <input type="email" placeholder="Email" id="email_input" name="email">
