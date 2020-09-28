@@ -1,4 +1,5 @@
 import Utils from "../services/utils.js";
+import Player from "../services/player.js";
 
 
 let getPlaylist = async (id) => {
@@ -55,9 +56,13 @@ let getPlaylistOwner = async (url) => {
 }
 
 let PlaylistPage = {
-    render: async () => {
+    playlist: undefined,
+
+    render: async function () {
         let request = Utils.parseRequestURL();
         let playlist = await getPlaylist(request.id);
+
+        this.playlist = playlist;
 
         let view = `
             <div class="playlist__header">
@@ -71,6 +76,7 @@ let PlaylistPage = {
             </div>
             <div class="grid playlist__songs">
                 <div></div>
+                <div></div>
                 <div class="grid-item"><span style="margin-left: 35px">Title</span></div>
                 <div class="grid-item"><span>Artist</span></div>
                 <div class="grid-item"><span>Album</span></div>
@@ -82,7 +88,16 @@ let PlaylistPage = {
                         <path d="m235.5 83.118h-27.706v144.265l87.176 87.176 19.589-19.589-79.059-79.059z" />
                     </svg>
                 </div>
-                ${playlist.songsList.map(song => `
+                ${playlist.songsList.map((song, index) => `
+                    <button class="btn-play-song" id="btn-play-song-${index}">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            viewBox="0 0 512 512" style="enable-background:new 0 0 45 45;" xml:space="preserve">
+                            <g><g><path d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M357.771,264.969
+                            l-149.333,96c-1.75,1.135-3.771,1.698-5.771,1.698c-1.75,0-3.521-0.438-5.104-1.302C194.125,359.49,192,355.906,192,352V160
+                            c0-3.906,2.125-7.49,5.563-9.365c3.375-1.854,7.604-1.74,10.875,0.396l149.333,96c3.042,1.958,4.896,5.344,4.896,8.969
+                            S360.813,263.01,357.771,264.969z"/></g></g>
+                        </svg>
+                    </button>
                     <div class="grid-item img-container"><img class="song-img" src=${song.image}></div>
                     <div class="grid-item"><span class="song-name">${song.name}</span></div>
                     <div class="grid-item"><a href="#" class="song-owner">${song.owner_name}</a></div>
@@ -93,8 +108,13 @@ let PlaylistPage = {
         `
         return view
     },
-    after_render: async () => {
-
+    after_render: async function () {
+        document.querySelectorAll('.grid.playlist__songs .btn-play-song').forEach(btn => {
+            btn.addEventListener("click", () => {
+                Player.set_playlist(this.playlist)
+                Player.set_current_song(btn.id);
+            })
+        })
     }
 }
 

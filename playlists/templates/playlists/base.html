@@ -126,7 +126,7 @@
                 </a>
             </div>
             <div class="song-img">
-                <img src="{% static 'layer.png' %}" alt>
+                <img id="album-cover-img" src="{% static 'layer.png' %}" alt>
             </div>
         </aside>
         <main>
@@ -173,7 +173,7 @@
                             C57,9.14,56.792,8.797,56.461,8.625z"/>
                     </svg>
                     </button>
-                    <button class="btn" style="height: 30px; width: 30px">
+                    <button class="btn" id="play-btn" style="height: 30px; width: 30px">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                              y="0px"
@@ -187,7 +187,7 @@
                         </g>
                     </svg>
                     </button>
-                    <button class="btn">
+                    <button class="btn" id="play-next-btn">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                              y="0px" height="20px" width="20px"
@@ -235,7 +235,7 @@
                     </svg>
                     </button>
                 </div>
-                <input type="range" min="0" max="100" step="1"/>
+                <input type="range" min="0" max="300" step="1"/>
             </div>
             <div class="bottom-panel__right">
                 <button class="btn" style="height: 25px; width: 25px;">
@@ -285,4 +285,5 @@
 </body>
 <script src="{% static 'range-slider/range-slider.js' %}"></script>
 <script src="{% static 'js/components/rangeSliders.js' %}"></script>
+<script type="module" src="{% static 'js/handlers.js' %}"></script>
 </html>
