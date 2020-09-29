@@ -4,6 +4,7 @@ import PlaylistPage from "./pages/playlistPage.js";
 import RegisterPage from "./pages/registerPage.js";
 import LoginPage from "./pages/loginPage.js";
 import LogoutPage from "./pages/logoutPage.js";
+import PlaylistCreatePage from "./pages/playlistCreatePage.js";
 
 
 const routes = {
@@ -12,7 +13,8 @@ const routes = {
     '/playlist/:id': PlaylistPage,
     '/register': RegisterPage,
     '/login': LoginPage,
-    '/logout': LogoutPage
+    '/logout': LogoutPage,
+    '/playlist-create': PlaylistCreatePage
 }
 
 export default routes;

@@ -1,0 +1,42 @@
+form#create-playlist-form {
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    width: 50%;
+}
+
+form#create-playlist-form > * {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+form#create-playlist-form > .input-genre-block, form#create-playlist-form > .input-song-block {
+    display: flex;
+    align-items: center;
+    color: #05386b;
+    font-weight: 500;
+    padding: 0;
+}
+
+form#create-playlist-form > div > label {
+    margin-left: 10px;
+}
+
+form#create-playlist-form > .input-song-block {
+    font-weight: 600;
+}
+
+form#create-playlist-form > .input-song-block > label > span.name {
+    font-weight: 500;
+    letter-spacing: -.04em;
+}
+
+
+form#create-playlist-form > button {
+    border-radius: 16px;
+    color: #edf5e1;
+    background: #05386b;
+}

@@ -67,9 +67,9 @@ class PlaylistSerializer(serializers.Serializer):
     added_at = serializers.DateTimeField(read_only=True)
     name = serializers.CharField(max_length=64)
     image = serializers.ImageField(max_length=100)
-    genre = serializers.HyperlinkedRelatedField(queryset=Genre.objects.all(), view_name='genre-detail')
+    genre = serializers.HyperlinkedRelatedField(queryset=Genre.objects.all(), view_name='genre-detail', read_only=False)
     songs = serializers.HyperlinkedRelatedField(allow_empty=True, many=True, view_name='song-detail',
-                                                queryset=Song.objects.all())
+                                                queryset=Song.objects.all(), read_only=False)
     description = serializers.CharField(style={'base_template': 'textarea.html'})
     owner = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
 
