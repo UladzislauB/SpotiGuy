@@ -186,6 +186,7 @@ footer .bottom-panel .btn {
 
 .bottom-panel .now-playing {
     display: flex;
+    width: 250px;
     align-self: center;
     margin-left: 15px;
 }
@@ -194,8 +195,11 @@ footer .bottom-panel .btn {
     padding-bottom: 5px;
 }
 
-.bottom-panel .now-playing ul li a {
-    display: block;
+.bottom-panel .now-playing ul li * {
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     font-weight: bolder;
     font-size: 16px;
     color: #edf5e1;
@@ -245,6 +249,17 @@ footer .bottom-panel .btn {
     fill: #05386b;
 }
 
+.progressBar__wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.progressBar__wrapper > span {
+    color: #edf5e1;
+    margin: 0 10px;
+}
+
 .rangeSlider__horizontal {
     width: 400px;
     height: 6px;
@@ -291,6 +306,4 @@ footer .bottom-panel .btn {
     .wrapper aside .song-img {
         display: none;
     }
-}
-
 }

@@ -1,3 +1,5 @@
+import Player from "../services/player.js";
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -35,6 +37,7 @@ let logoutUser = async () => {
             .then(response => {
 
                     if (response.status === 200) {
+                        Player.on_logout();
                         window.location.hash = '#/login';
                     }
                 }

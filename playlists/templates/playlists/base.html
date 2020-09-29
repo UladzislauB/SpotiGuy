@@ -142,8 +142,8 @@
         <div class="bottom-panel">
             <div class="now-playing">
                 <ul>
-                    <li><a href="#">SLOW DANCING IN THE DARK</a></li>
-                    <li><a href="#">Joji</a></li>
+                    <li><span id="song-name-label">SLOW DANCING IN THE DARK</span></li>
+                    <li><a id="song-artist-label" href="#">Joji</a></li>
                 </ul>
                 <button class="btn">
                     <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
@@ -161,7 +161,7 @@
                             <path d="m418.89 354.444h-5.963c-27.864 0-54.391-12.02-72.752-33.009l-55.704-63.658 55.704-63.658c18.361-20.989 44.888-33.009 72.752-33.009h5.963v64.444l96.665-96.669-96.665-96.663v64.444h-5.963c-46.445 0-90.641 20.044-121.243 55.036l-148.525 169.733c-18.361 20.988-44.888 33.009-72.752 33.009h-70.407v64.444h70.408c46.445 0 90.641-20.045 121.243-55.036l50.017-57.16 50.017 57.16c30.602 34.991 74.797 55.036 121.243 55.036h5.963v64.444l96.665-96.665-96.666-96.667z"/>
                         </svg>
                     </button>
-                    <button class="btn">
+                    <button class="btn" id="play-prev-btn">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                              y="0px" width="20px" height="20px"
@@ -235,7 +235,11 @@
                     </svg>
                     </button>
                 </div>
-                <input type="range" min="0" max="300" step="1"/>
+                <div class="progressBar__wrapper">
+                    <span id="curr-time-label">0:00</span>
+                    <input type="range" min="0" max="300" step="1" value="0"/>
+                    <span id="end-time-label">0:00</span>
+                </div>
             </div>
             <div class="bottom-panel__right">
                 <button class="btn" style="height: 25px; width: 25px;">
@@ -276,7 +280,7 @@
                 </svg>
                 </button>
                 <div class="volume-bar__wrapper">
-                    <input type="range" min="0" max="100" step="1">
+                    <input type="range" min="0" max="100" step="1" value="100">
                 </div>
             </div>
         </div>
@@ -284,6 +288,5 @@
 </div>
 </body>
 <script src="{% static 'range-slider/range-slider.js' %}"></script>
-<script src="{% static 'js/components/rangeSliders.js' %}"></script>
 <script type="module" src="{% static 'js/handlers.js' %}"></script>
 </html>

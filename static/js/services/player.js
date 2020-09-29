@@ -1,4 +1,22 @@
-// import {progressBar, volumeBar} from "../components/rangeSliders.js";
+const progressBar = document.querySelector('.player-controls input[type="range"]');
+const volumeBar = document.querySelector('.volume-bar__wrapper input[type="range"]');
+rangeSlider.create(progressBar, {
+    onSlideStart: value => {
+        Player.on_start_slide();
+    },
+    onSlide: value => {
+        Player.on_progress_bar_input(value);
+    },
+    onSlideEnd: value => {
+        Player.on_end_slide();
+    }
+});
+rangeSlider.create(volumeBar, {
+    onSlide: value => {
+        Player.on_volume_bar_slide(value / 100);
+    }
+});
+
 
 let Player = {
     _songs_queue: undefined,
@@ -6,8 +24,14 @@ let Player = {
     audio_player: document.getElementById('player'),
     album_cover: document.getElementById('album-cover-img'),
     is_playing: false,
+    is_sliding: false,
     play_btn: document.getElementById("play-btn"),
     next_btn: document.getElementById('play-next-btn'),
+    prev_btn: document.getElementById('play-prev-btn'),
+    curr_time_label: document.getElementById('curr-time-label'),
+    end_time_label: document.getElementById('end-time-label'),
+    song_name_label: document.getElementById('song-name-label'),
+    artist_name_label: document.getElementById('song-artist-label'),
 
 
     init: function () {
@@ -21,14 +45,10 @@ let Player = {
             Player.on_play_next();
         });
         this.audio_player.addEventListener("timeupdate", function () {
-            if (Player.audio_player.currentTime % 60 < 10) {
-                let curTime = (Player.audio_player.currentTime / 60 | 0) + ":0" + (Player.audio_player.currentTime % 60 | 0);
-            } else {
-                let curTime = (Player.audio_player.currentTime / 60 | 0) + ":" + (Player.audio_player.currentTime % 60 | 0);
-            }
-            progressBar.rangeSlider.update({
-                "value": (Player.audio_player.currentTime / Player.audio_player.duration) * 300 | 0
-            });
+            Player.on_time_update();
+        });
+        this.prev_btn.addEventListener('click', function () {
+            Player.on_play_previous();
         })
     },
 
@@ -42,6 +62,10 @@ let Player = {
         let song = this._songs_queue[this._current_song];
         this.audio_player.src = song.audio_file;
         progressBar.value = 0;
+        this.curr_time_label.innerHTML = '0:00';
+        this.song_name_label.innerHTML = song.name;
+        this.artist_name_label.innerHTML = song.owner_name;
+        this.is_playing = false;
         this.on_play_click();
         this.album_cover.src = song.image;
     },
@@ -77,6 +101,16 @@ let Player = {
         }
     },
 
+    on_logout: function () {
+        if (this.is_playing) {
+            this.on_play_click();
+        }
+        this.audio_player.src = '';
+        this.album_cover.src = '';
+        this._songs_queue = undefined;
+        this._current_song = undefined;
+    },
+
     on_play_next: function () {
         if (this._current_song !== undefined) {
             this._current_song += 1;
@@ -86,10 +120,75 @@ let Player = {
             let song = this._songs_queue[this._current_song];
             this.audio_player.src = song.audio_file;
             this.is_playing = false;
+            this.curr_time_label.innerHTML = '0:00';
+            this.song_name_label.innerHTML = song.name;
+            this.artist_name_label.innerHTML = song.owner_name;
             this.on_play_click();
             this.album_cover.src = song.image;
         }
+    },
+
+    on_play_previous: function () {
+        if (this._current_song !== undefined) {
+            if (this.audio_player.currentTime < 10) {
+                this._current_song -= 1;
+                if (this._current_song < 0) {
+                    this._current_song = this._songs_queue.length - 1;
+                }
+                let song = this._songs_queue[this._current_song];
+                this.audio_player.src = song.audio_file;
+                this.is_playing = false;
+                this.curr_time_label.innerHTML = '0:00';
+                this.song_name_label.innerHTML = song.name;
+                this.artist_name_label.innerHTML = song.owner_name;
+                this.on_play_click();
+                this.album_cover.src = song.image;
+            } else {
+                this.audio_player.currentTime = 0;
+            }
+        }
+    },
+
+    time_to_format: function (time) {
+        let currTime;
+        if (time % 60 < 10) {
+            currTime = (time / 60 | 0) + ":0" + (time % 60 | 0);
+        } else {
+            currTime = (time / 60 | 0) + ":" + (time % 60 | 0);
+        }
+        return currTime
+    },
+
+    on_time_update: function () {
+        if (!this.is_sliding) {
+            let time = this.audio_player.currentTime;
+            this.curr_time_label.innerHTML = this.time_to_format(time);
+            this.end_time_label.innerHTML = this.time_to_format(this.audio_player.duration);
+
+            progressBar.rangeSlider.update({
+                "value": (time / Player.audio_player.duration) * 300 | 0
+            });
+        }
+    },
+
+    on_start_slide: function () {
+        this.is_sliding = true;
+        this.audio_player.pause();
+    },
+
+    on_end_slide: function() {
+        this.is_sliding = false;
+        this.audio_player.play();
+    },
+
+    on_progress_bar_input: function (value) {
+        this.audio_player.currentTime = value / 300 * this.audio_player.duration;
+    },
+
+    on_volume_bar_slide: function (volume) {
+        this.audio_player.volume = volume;
     }
+
 };
 
 
