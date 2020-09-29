@@ -1,4 +1,4 @@
-#!/home/qwerty/__study__/SpotiGuy/venv/bin/python
+#!/home/qwerty/study/SpotiGuy/venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

@@ -25,7 +25,11 @@ let loginUser = async () => {
                     return response.json();
                 }
             })
-            .then(response => DropdownMenu.render(response['username'], response['role']))
+            .then(response => {
+                if (response !== null) {
+                    DropdownMenu.render(response['username'], response['role'])
+                }
+            })
     } catch (e) {
         console.error("Fail to login", e);
     }

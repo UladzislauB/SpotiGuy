@@ -1,4 +1,4 @@
-#!/home/qwerty/__study__/SpotiGuy/venv/bin/python
+#!/home/qwerty/study/SpotiGuy/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

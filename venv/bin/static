@@ -1,4 +1,4 @@
-#!/home/qwerty/__study__/SpotiGuy/venv/bin/python
+#!/home/qwerty/study/SpotiGuy/venv/bin/python
 # EASY-INSTALL-ENTRY-SCRIPT: 'static3==0.7.0','console_scripts','static'
 import re
 import sys

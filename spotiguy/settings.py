@@ -19,10 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z9-0jg(6=(xf-!dr%-*pk29c6n5l87bax2@sv_x2r44b-jm%+!'
-
+# SECRET_KEY = 'z9-0jg(6=(xf-!dr%-*pk29c6n5l87bax2@sv_x2r44b-jm%+!'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'z9-0jg(6=(xf-!dr%-*pk29c6n5l87bax2@sv_x2r44b-jm%+!')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,6 +132,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -139,21 +148,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-# Настройки Heroku
-if os.getcwd() == '/app':
-    import dj_database_url
+import dj_database_url
 
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-    # Поддержка заголовка 'X-Forwarded-Proto' для request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Разрешены все заголовки хостов.
-    ALLOWED_HOSTS = ['*']
-
-    # Конфигурация статических ресурсов
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)

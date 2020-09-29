@@ -1,3 +1,5 @@
+import DropdownMenu from "../components/dropdownMenu.js";
+
 let registerUser = async () => {
     const username = document.getElementById('username_input');
     const email = document.getElementById("email_input");
@@ -32,6 +34,9 @@ let registerUser = async () => {
             'password': pass.value,
             'first_name': firstName.value,
             'last_name': lastName.value,
+            "playlist_queue_id": 0,
+            "current_song": 0,
+            "playlist_set": []
         };
 
         let options = {
@@ -46,6 +51,11 @@ let registerUser = async () => {
                 .then(response => {
                     if (response.status === 201) {
                         window.location.hash = '#/';
+                        return response.json()
+                    }
+                }).then(response => {
+                    if (response !== null) {
+                        DropdownMenu.render(response['username'], response['role'])
                     }
                 })
         } catch (e) {
@@ -55,7 +65,7 @@ let registerUser = async () => {
     }
 }
 
-let RegisterPage =  {
+let RegisterPage = {
     render: async () => {
         let view = `
             <div class="auth-page" id="auth-page">
