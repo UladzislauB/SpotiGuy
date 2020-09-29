@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/registerPage.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/dropdownMenu.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/playlistCreate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/createAlbumPage.css' %}">
     <script src="{% static 'js/app.js' %}" type="module"></script>
 </head>
 <body>
@@ -36,9 +37,8 @@
               </svg>
         </button>
         <div class="dropdown-content">
-            <a href="#">Link 1</a>
             {% if user.role == 2 %}
-                <a href="#">Link 2</a>
+                <a href="#/album-create">New album</a>
             {% endif %}
             <a href="#/logout">Logout</a>
         </div>

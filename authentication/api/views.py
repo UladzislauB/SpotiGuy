@@ -61,6 +61,25 @@ class Login(APIView):
             )
 
 
+class GetCurrentUser(APIView):
+    def get(self, request):
+        serializer = UserSerializer(request.user, context={'request': request})
+        if request.user:
+            return JsonResponse(
+                {
+                    'user': serializer.data
+                },
+                status=200
+            )
+        else:
+            return JsonResponse(
+                {
+                    'user': 'Not authenticated user!'
+                },
+                status=400
+            )
+
+
 class Logout(APIView):
     def post(self, request):
         Token.objects.get(user=request.user).delete()

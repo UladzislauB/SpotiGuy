@@ -86,7 +86,7 @@ let PlaylistCreatePage = {
                 </div>
             `).join('\n')}
             <label for="file"><strong>Choose an image for playlist</strong></label>
-            <input class="box__file" type="file" id="file-image-playlist" />
+            <input type="file" id="file-image-playlist" />
             <button type="button" id="create-playlist-btn">Create</button>
             <div id="create-playlist-status"></div>
         </form>
@@ -105,14 +105,12 @@ let PlaylistCreatePage = {
 
                 const formData = new FormData();
                 let songs = Array.from(songsInputs.values()).map(node => node.value);
-                formData.append('image', image.files[0])
+                formData.append('image', image.files[0]);
                 formData.append('name', name);
                 formData.append('description', description);
                 formData.append('genre', genreInput.value);
                 formData.append('songs', songs);
                 await createPlaylist(formData);
-            } else {
-                console.log("error", name + description + genreInput);
             }
         });
     }

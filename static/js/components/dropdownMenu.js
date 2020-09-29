@@ -11,10 +11,11 @@ let DropdownMenu = {
               </svg>
             </button>
             <div class="dropdown-content">
-              <a href="#">Link 1</a>
               `;
          if (role !== 1) {
-             view += `<a href="#">Link 2</a>`;
+             view += `
+                    <a href="#/album-create">New album</a>
+                `;
          }
         document.querySelector('body > .wrapper > .dropdown').innerHTML = view + `<a href="#/logout">Logout</a>
             </div>`;
