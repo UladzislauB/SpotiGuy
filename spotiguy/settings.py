@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'z9-0jg(6=(xf-!dr%-*pk29c6n5l87
 # DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vast-oasis-76347.herokuapp.com', '127.0.0.1']
 
 # Custom user
 AUTH_USER_MODEL = 'authentication.User'
