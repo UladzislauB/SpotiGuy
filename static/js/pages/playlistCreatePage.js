@@ -52,7 +52,11 @@ let createPlaylist = async (data) => {
         await fetch(request, options)
             .then(response => {
                 if (response.status === 201) {
-                    document.getElementById("create-playlist-status").innerHTML = 'Created!'
+                    document.getElementById("create-playlist-status").innerHTML = 'Created!';
+                    setTimeout(() => {
+                        window.location.hash = '#/'
+                    }, 2000);
+
                 } else {
                     document.getElementById("create-playlist-status").innerHTML = 'Error'
                 }
