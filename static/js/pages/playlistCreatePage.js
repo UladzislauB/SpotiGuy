@@ -115,7 +115,8 @@ let PlaylistCreatePage = {
                 formData.append('name', name);
                 formData.append('description', description);
                 formData.append('genre', genreInput.value);
-                formData.append('songs', songs);
+                formData.append('songs', JSON.stringify(songs));
+                console.log(typeof formData.get('songs'), formData.get('songs'));
                 await createPlaylist(formData);
             }
         });
