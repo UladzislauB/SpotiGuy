@@ -42,7 +42,12 @@ let createAlbum = async (data) => {
                 } else {
                     document.getElementById("create-album-status").innerHTML = 'Error'
                 }
-            }).then(result => songsUploadSection.after_render(result))
+            }).then(result => {
+                if (result != null) {
+                     document.getElementById('ul-list-songs').innerHTML = `<li>List of album's songs:</li>`;
+                     songsUploadSection.after_render(result)
+                }
+            })
     } catch (e) {
         console.error(e);
         document.getElementById("create-album-status").innerHTML = 'Error!';
