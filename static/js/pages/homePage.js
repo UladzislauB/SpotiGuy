@@ -27,7 +27,7 @@ let HomePage = {
                         playlist.description.slice(0, 43) + '...'}</div>
                 </div>
             </a>
-        `).join('\n')
+        `).join('\n');
         return view
     },
     after_render: async () => {

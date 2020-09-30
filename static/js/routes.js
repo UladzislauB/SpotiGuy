@@ -6,10 +6,12 @@ import LoginPage from "./pages/loginPage.js";
 import LogoutPage from "./pages/logoutPage.js";
 import PlaylistCreatePage from "./pages/playlistCreatePage.js";
 import CreateAlbumPage from "./pages/createAlbumPage.js";
+import GenreDetailPage from "./pages/genreDetailPage.js";
 
 
 const routes = {
     '/': HomePage,
+    '/genres/:id': GenreDetailPage,
     '/genres': GenresPage,
     '/playlist/:id': PlaylistPage,
     '/register': RegisterPage,

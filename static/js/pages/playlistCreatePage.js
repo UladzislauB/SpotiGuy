@@ -72,13 +72,14 @@ let PlaylistCreatePage = {
         <form id="create-playlist-form">
             <input type="text" placeholder="Name" id="playlist-name-input">
             <textarea placeholder="Description" id="playlist-description-input" cols="40" rows="2"></textarea>
+            <p>Choose genre for your playlist:</p>
             ${genres.map(genre => `
                 <div class="input-genre-block">
                     <input type="radio" id="${genre.name}" name="genre" value='http://localhost:8000/api/genres/${genre.id}/'>
                     <label for="${genre.name}">${genre.name}</label>
                 </div> 
             `).join("\n")}
-            <p>Choose songs for playlist:</p>
+            <p>Choose songs for playlist  <strong>(please choose at list one song)</strong>:</p>
             ${songs.map(song => `
                 <div class="input-song-block">
                     <input type="checkbox" id="song__${song.id}" value="/api/songs/${song.id}/">
@@ -100,11 +101,12 @@ let PlaylistCreatePage = {
             let genreInput = document.querySelector("input[name='genre']:checked");
             let image = document.getElementById("file-image-playlist");
             let songsInputs = document.querySelectorAll("form#create-playlist-form > .input-song-block > input:checked");
+            let songs = Array.from(songsInputs.values()).map(node => node.value);
 
-            if (name !== '' && description !== '' && genreInput !== null) {
+            if (name !== '' && description !== '' && genreInput !== null && songs.length !== 0) {
 
                 const formData = new FormData();
-                let songs = Array.from(songsInputs.values()).map(node => node.value);
+
                 formData.append('image', image.files[0]);
                 formData.append('name', name);
                 formData.append('description', description);
