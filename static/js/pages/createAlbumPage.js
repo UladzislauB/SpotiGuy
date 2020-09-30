@@ -34,6 +34,9 @@ let createAlbum = async (data) => {
             .then(async response => {
                 if (response.status === 201) {
                     document.getElementById("create-album-status").innerHTML = 'Created!';
+                    setTimeout(() => {
+                        document.getElementById("create-album-status").innerHTML = '';
+                    }, 3000);
                     document.getElementById("songs-add-block").innerHTML = await songsUploadSection.render();
                     return response.json()
                 } else {
@@ -67,6 +70,9 @@ let createSong = async (data) => {
             .then(async response => {
                 if (response.status === 201) {
                     document.getElementById("create-song-status").innerHTML = 'Created!'
+                    setTimeout(() => {
+                        document.getElementById("create-song-status").innerHTML = '';
+                    }, 3000);
                     return response.json()
                 } else {
                     document.getElementById("create-song-status").innerHTML = 'Error'
